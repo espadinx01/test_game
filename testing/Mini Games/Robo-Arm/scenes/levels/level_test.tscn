@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cm65se2aq2pnn"]
+
+[ext_resource type="PackedScene" uid="uid://t3j8c2xx8vjl" path="res://Mini Games/Robo-Arm/scenes/arm/robot_arm.tscn" id="1_uayvr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yfudt"]
+
+[sub_resource type="Sky" id="Sky_uayvr"]
+sky_material = SubResource("ProceduralSkyMaterial_yfudt")
+
+[sub_resource type="Environment" id="Environment_ixpof"]
+background_mode = 2
+sky = SubResource("Sky_uayvr")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_232jq"]
+size = Vector2(40, 40)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ucg54"]
+albedo_color = Color(0.45323175, 0.45323175, 0.45323175, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ch4or"]
+size = Vector3(40, 1, 40)
+
+[node name="LevelTest" type="Node3D" unique_id=844596360]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1376281316]
+environment = SubResource("Environment_ixpof")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=960097721]
+transform = Transform3D(0.8660254, 0.38302222, -0.32139382, 0, 0.64278764, 0.76604444, 0.5, -0.66341394, 0.5566704, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1413260842]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=2075854167]
+mesh = SubResource("PlaneMesh_232jq")
+surface_material_override/0 = SubResource("StandardMaterial3D_ucg54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=115853430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_ch4or")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1902584044]
+transform = Transform3D(-0.9956968, 0.033905517, -0.08624674, 0.0033510206, 0.94323164, 0.33211872, 0.09261132, 0.3304005, -0.93928623, -0.002673955, 3.1614935, -9.122788)
+current = true
+
+[node name="RobotArm" parent="." unique_id=1012060362 instance=ExtResource("1_uayvr")]
+control_mode = 0

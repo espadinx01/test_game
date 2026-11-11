@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cyhonymvffguo"]
+
+[ext_resource type="Texture2D" uid="uid://c7q8im1ypqe4a" path="res://Metal038_4K-JPG_Displacement.jpg" id="Displacement"]
+[ext_resource type="Texture2D" uid="uid://d37odts4vufg8" path="res://Metal038_4K-JPG_Metalness.jpg" id="Metalness"]
+[ext_resource type="Texture2D" uid="uid://b2nddbheidf76" path="res://Metal038_4K-JPG_Roughness.jpg" id="Roughness"]
+
+[resource]
+albedo_color = Color(0.8346143, 0.8346143, 0.8346143, 1)
+albedo_texture = ExtResource("Displacement")
+metallic = 1.0
+metallic_texture = ExtResource("Metalness")
+metallic_texture_channel = 4
+roughness_texture = ExtResource("Roughness")
+roughness_texture_channel = 4
+normal_enabled = true
+heightmap_enabled = true
+heightmap_scale = 1.0

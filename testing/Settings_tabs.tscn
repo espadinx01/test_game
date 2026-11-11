@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://b6xwxc4lfpge3"]
+
+[ext_resource type="Script" uid="uid://d1bkds02fq3f2" path="res://panel_manager.gd" id="1_isvwj"]
+[ext_resource type="ButtonGroup" uid="uid://bsf5k0v4d8r0t" path="res://settings_button_group.tres" id="1_vxqmo"]
+
+[node name="Control" type="Control" unique_id=1171672071]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_isvwj")
+
+[node name="PanelManager" type="MarginContainer" parent="." unique_id=97373742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelManager" unique_id=238880333]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelManager/HBoxContainer" unique_id=215562252]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="GameplayButton" type="Button" parent="PanelManager/HBoxContainer/VBoxContainer" unique_id=1192116052]
+unique_name_in_owner = true
+modulate = Color(0, 0.6, 0.9137255, 1)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("1_vxqmo")
+text = "Gameplay"
+
+[node name="GraphicsButton" type="Button" parent="PanelManager/HBoxContainer/VBoxContainer" unique_id=1975982804]
+unique_name_in_owner = true
+modulate = Color(0.9703148, 0.6326515, 0.4815765, 1)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("1_vxqmo")
+text = "Graphics"
+
+[node name="AudioButton" type="Button" parent="PanelManager/HBoxContainer/VBoxContainer" unique_id=1467458114]
+unique_name_in_owner = true
+modulate = Color(0.8117647, 0.29411766, 0, 1)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("1_vxqmo")
+text = "Audio"
+
+[node name="ControlsButton" type="Button" parent="PanelManager/HBoxContainer/VBoxContainer" unique_id=544254508]
+unique_name_in_owner = true
+modulate = Color(0.67058825, 0.8784314, 0.9411765, 1)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("1_vxqmo")
+text = "Controls"
+
+[node name="GameplayPanel" type="PanelContainer" parent="PanelManager/HBoxContainer" unique_id=1748008383]
+unique_name_in_owner = true
+modulate = Color(0, 0.6, 0.9137255, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelManager/HBoxContainer/GameplayPanel" unique_id=1996982345]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelManager/HBoxContainer/GameplayPanel/MarginContainer" unique_id=1767572597]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Gameplay"
+horizontal_alignment = 2
+
+[node name="GraphicsPanel" type="PanelContainer" parent="PanelManager/HBoxContainer" unique_id=1369575634]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.96862745, 0.6313726, 0.48235294, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelManager/HBoxContainer/GraphicsPanel" unique_id=1684625332]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelManager/HBoxContainer/GraphicsPanel/MarginContainer" unique_id=1469044086]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Graphics"
+horizontal_alignment = 2
+
+[node name="AudioPanel" type="PanelContainer" parent="PanelManager/HBoxContainer" unique_id=1907493434]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.8117647, 0.29411766, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelManager/HBoxContainer/AudioPanel" unique_id=567655526]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelManager/HBoxContainer/AudioPanel/MarginContainer" unique_id=405088209]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Audio"
+horizontal_alignment = 2
+
+[node name="ControlsPanel" type="PanelContainer" parent="PanelManager/HBoxContainer" unique_id=1198744015]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.67058825, 0.8784314, 0.9411765, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelManager/HBoxContainer/ControlsPanel" unique_id=1719256016]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelManager/HBoxContainer/ControlsPanel/MarginContainer" unique_id=872512450]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Controls"
+horizontal_alignment = 2

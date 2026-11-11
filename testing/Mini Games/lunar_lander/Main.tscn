@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://csu3hxqshyu1a"]
+
+[ext_resource type="Script" uid="uid://chjjv44dgeom3" path="res://Mini Games/lunar_lander/terrain.gd" id="1_1llop"]
+[ext_resource type="Script" uid="uid://ciksb00a4lh4p" path="res://Mini Games/lunar_lander/main.gd" id="1_cbu2q"]
+[ext_resource type="Script" uid="uid://d1kd4d12jniie" path="res://Mini Games/lunar_lander/hud.gd" id="3_ggap0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbu2q"]
+
+[node name="Main" type="Node2D" unique_id=1332876914]
+script = ExtResource("1_cbu2q")
+
+[node name="Terrain" type="StaticBody2D" parent="." unique_id=1113776203]
+physics_material_override = SubResource("PhysicsMaterial_cbu2q")
+script = ExtResource("1_1llop")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain" unique_id=655854160]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1831025802]
+script = ExtResource("3_ggap0")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=841774198]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer" unique_id=1425194876]
+layout_mode = 2
+
+[node name="scoreLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=634759530]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=794427459]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FuelBar" type="ProgressBar" parent="HUD/MarginContainer/VBoxContainer" unique_id=50322659]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 16)
+layout_mode = 2
+show_percentage = false
+
+[node name="AltLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=58274577]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HspeedLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=661473143]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VSpeedLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=989602910]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AngleLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=830015226]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MessageLabel" type="Label" parent="HUD" unique_id=577123379]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
