@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjrxbi7sdoi4t" path="res://Mini Games/Robo-Arm/scripts/arm/robot_arm.gd" id="1_jx0vj"]
 [ext_resource type="Script" uid="uid://dvohqomdo0s6i" path="res://Mini Games/Robo-Arm/scripts/arm/arm_joint.gd" id="1_n8vbo"]
+[ext_resource type="Script" uid="uid://jbmv6erjvb13" path="res://Mini Games/Robo-Arm/scripts/arm/gripper.gd" id="3_kb5xp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5r07"]
 resource_name = "Material.010"
@@ -163,6 +164,10 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1rkgm")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jx0vj"]
+height = 0.7
+radius = 0.85
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_geosp"]
 _surfaces = [{
@@ -479,6 +484,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_db0tj")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kb5xp"]
+radius = 0.3
+height = 2.1
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_g07vy"]
 _surfaces = [{
 "aabb": AABB(0.034132123, -0.5049448, -0.50414014, 1.6703633, 4.8205147, 1.0012617),
@@ -683,6 +692,10 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_h2g2r")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cknw3"]
+radius = 0.3
+height = 2.2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_swuqt"]
 _surfaces = [{
@@ -1343,12 +1356,19 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_u487u")
 
-[node name="RobotArm" type="Node3D" unique_id=1012060362 node_paths=PackedStringArray("turret", "shoulder", "elbow", "wrist")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jd3qe"]
+size = Vector3(0.9, 0.6, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jx0vj"]
+size = Vector3(0.9, 0.9, 0.9)
+
+[node name="RobotArm" type="Node3D" unique_id=1012060362 node_paths=PackedStringArray("turret", "shoulder", "elbow", "wrist", "gripper")]
 script = ExtResource("1_jx0vj")
 turret = NodePath("Turret")
 shoulder = NodePath("Turret/Shoulder")
 elbow = NodePath("Turret/Shoulder/Elbow")
 wrist = NodePath("Turret/Shoulder/Elbow/Wrist")
+gripper = NodePath("Turret/Shoulder/Elbow/Wrist/Gripper")
 
 [node name="Base" type="StaticBody3D" parent="." unique_id=1786056046]
 
@@ -1369,6 +1389,10 @@ transform = Transform3D(0.5, 0, 0, 0, -8.1460335e-08, 0.5, 0, -0.5, -8.1460335e-
 
 [node name="Cylinder_013_Material_003_0" type="MeshInstance3D" parent="Base/Cylinder_013" unique_id=848417642]
 mesh = SubResource("ArrayMesh_6npgp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base" unique_id=17532703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_jx0vj")
 
 [node name="Turret" type="Node3D" parent="." unique_id=482919564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575, 0)
@@ -1411,6 +1435,9 @@ max_angle_deg = 45.0
 instant = true
 
 [node name="UpperArm" type="AnimatableBody3D" parent="Turret/Shoulder" unique_id=1005688168]
+collision_layer = 2
+collision_mask = 4
+sync_to_physics = false
 
 [node name="Cylinder_004" type="Node3D" parent="Turret/Shoulder/UpperArm" unique_id=462363108]
 transform = Transform3D(0.5, 0, 0, 0, -0.18568407, 0.46424282, 0, -0.46424282, -0.18568407, -0.4164714, 0.0019688606, -0.0034307996)
@@ -1424,6 +1451,10 @@ mesh = SubResource("ArrayMesh_nuglq")
 [node name="Cylinder_004_Material_007_0" type="MeshInstance3D" parent="Turret/Shoulder/UpperArm/Cylinder_004" unique_id=238605999]
 mesh = SubResource("ArrayMesh_srhec")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Turret/Shoulder/UpperArm" unique_id=2068686492]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0.98, -0.32)
+shape = SubResource("CapsuleShape3D_kb5xp")
+
 [node name="Elbow" type="Node3D" parent="Turret/Shoulder" unique_id=1250943521]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7750001, -0.65)
 script = ExtResource("1_n8vbo")
@@ -1433,6 +1464,9 @@ max_angle_deg = 45.0
 instant = true
 
 [node name="ForeArm" type="AnimatableBody3D" parent="Turret/Shoulder/Elbow" unique_id=1061290527]
+collision_layer = 2
+collision_mask = 4
+sync_to_physics = false
 
 [node name="Cube_003" type="Node3D" parent="Turret/Shoulder/Elbow/ForeArm" unique_id=1739461634]
 transform = Transform3D(0.5, 0, 0, 0, 0.30438074, 0.39667663, 0, -0.39667663, 0.30438074, -0.4346569, 0.020788908, -0.04495865)
@@ -1458,6 +1492,10 @@ transform = Transform3D(0.5, 0, 0, 0, 0.30438074, 0.39667663, 0, -0.39667663, 0.
 [node name="Cube_002_Material_003_0" type="MeshInstance3D" parent="Turret/Shoulder/Elbow/ForeArm/Cube_002" unique_id=631181113]
 mesh = SubResource("ArrayMesh_6ncqy")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Turret/Shoulder/Elbow/ForeArm" unique_id=869874748]
+transform = Transform3D(1, 0, 0, 0, 0.6156615, 0.7880107, 0, -0.7880107, 0.6156615, 0, 0.6, -0.78)
+shape = SubResource("CapsuleShape3D_cknw3")
+
 [node name="Wrist" type="Node3D" parent="Turret/Shoulder/Elbow" unique_id=1027483662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1999998, -1.5500001)
 script = ExtResource("1_n8vbo")
@@ -1466,7 +1504,13 @@ min_angle_deg = -45.0
 max_angle_deg = 45.0
 instant = true
 
-[node name="Gripper" type="AnimatableBody3D" parent="Turret/Shoulder/Elbow/Wrist" unique_id=1814845081]
+[node name="Gripper" type="AnimatableBody3D" parent="Turret/Shoulder/Elbow/Wrist" unique_id=1814845081 node_paths=PackedStringArray("grab_area", "grab_point")]
+collision_layer = 2
+collision_mask = 4
+sync_to_physics = false
+script = ExtResource("3_kb5xp")
+grab_area = NodePath("GrabArea")
+grab_point = NodePath("GrabPoint")
 
 [node name="Cylinder_014" type="Node3D" parent="Turret/Shoulder/Elbow/Wrist/Gripper" unique_id=1153911545]
 transform = Transform3D(0.35271052, 0.35439426, -1.5933166e-07, -0.23618945, 0.23506746, 0.3727705, 0.26421553, -0.26296005, 0.3332299, -0.43466055, -0.036810398, 0.010800123)
@@ -1545,3 +1589,18 @@ transform = Transform3D(-0.77674854, -0.011679264, 0.6297025, 0.30676746, 0.8661
 
 [node name="Cylinder_011_Material_006_0" type="MeshInstance3D" parent="Turret/Shoulder/Elbow/Wrist/Gripper/Cylinder_014/Cylinder_011" unique_id=1833397333]
 mesh = SubResource("ArrayMesh_xuk2q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Turret/Shoulder/Elbow/Wrist/Gripper" unique_id=1612904617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.3)
+shape = SubResource("BoxShape3D_jd3qe")
+
+[node name="GrabArea" type="Area3D" parent="Turret/Shoulder/Elbow/Wrist/Gripper" unique_id=56355075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, -1.55)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Turret/Shoulder/Elbow/Wrist/Gripper/GrabArea" unique_id=205892573]
+shape = SubResource("BoxShape3D_jx0vj")
+
+[node name="GrabPoint" type="Marker3D" parent="Turret/Shoulder/Elbow/Wrist/Gripper" unique_id=1560514565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, -1.55)

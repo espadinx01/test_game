@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cm65se2aq2pnn"]
 
 [ext_resource type="PackedScene" uid="uid://t3j8c2xx8vjl" path="res://Mini Games/Robo-Arm/scenes/arm/robot_arm.tscn" id="1_uayvr"]
+[ext_resource type="PackedScene" uid="uid://bsfnqrwy3csfm" path="res://Mini Games/Robo-Arm/scenes/props/Cargo.tscn" id="2_ixpof"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yfudt"]
 
@@ -36,7 +37,7 @@ mesh = SubResource("PlaneMesh_232jq")
 surface_material_override/0 = SubResource("StandardMaterial3D_ucg54")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=115853430]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 shape = SubResource("BoxShape3D_ch4or")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1902584044]
@@ -44,4 +45,6 @@ transform = Transform3D(-0.9956968, 0.033905517, -0.08624674, 0.0033510206, 0.94
 current = true
 
 [node name="RobotArm" parent="." unique_id=1012060362 instance=ExtResource("1_uayvr")]
-control_mode = 0
+
+[node name="Cargo" parent="." unique_id=1119790420 instance=ExtResource("2_ixpof")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -3)
