@@ -3,7 +3,7 @@ extends Resource
 
 @export var title: String = 'Niveau 1'
 @export var scene: PackedScene
-@export_enum('Simple', 'Avancé') var control_mode: int = 0
+@export_enum('Simple', 'Avancé') var control_mode: int = 1
 @export var instant_joints: bool = true
 @export var max_speed_deg: float = 60.0
 @export var acceleration_deg: float = 200.0

@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://cm65se2aq2pnn"]
 
 [ext_resource type="PackedScene" uid="uid://t3j8c2xx8vjl" path="res://Mini Games/Robo-Arm/scenes/arm/robot_arm.tscn" id="1_uayvr"]
+[ext_resource type="Script" uid="uid://borr5lv034uwi" path="res://Mini Games/Robo-Arm/scripts/game/level.gd" id="1_ucg54"]
 [ext_resource type="PackedScene" uid="uid://bsfnqrwy3csfm" path="res://Mini Games/Robo-Arm/scenes/props/Cargo.tscn" id="2_ixpof"]
+[ext_resource type="PackedScene" uid="uid://c4vu1qbjae3t8" path="res://Mini Games/Robo-Arm/scenes/props/DropZone.tscn" id="3_232jq"]
+[ext_resource type="Script" uid="uid://b3rv8vlggmy3a" path="res://Mini Games/Robo-Arm/scripts/ui/hud.gd" id="5_ch4or"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yfudt"]
 
@@ -22,6 +25,7 @@ albedo_color = Color(0.45323175, 0.45323175, 0.45323175, 1)
 size = Vector3(40, 1, 40)
 
 [node name="LevelTest" type="Node3D" unique_id=844596360]
+script = ExtResource("1_ucg54")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1376281316]
 environment = SubResource("Environment_ixpof")
@@ -48,3 +52,34 @@ current = true
 
 [node name="Cargo" parent="." unique_id=1119790420 instance=ExtResource("2_ixpof")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -3)
+
+[node name="DropZone" parent="." unique_id=318872012 instance=ExtResource("3_232jq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -3)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1887533049]
+script = ExtResource("5_ch4or")
+
+[node name="TimeLabel" type="Label" parent="HUD" unique_id=1584072051]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MessageLabel" type="Label" parent="HUD" unique_id=694471630]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
