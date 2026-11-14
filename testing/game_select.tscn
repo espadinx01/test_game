@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://re5ktc1f13r8"]
+
+[ext_resource type="Script" uid="uid://bqh70jmyokfwp" path="res://root/game_select.gd" id="1_rsw2t"]
+
+[node name="GameSelect" type="Control" unique_id=2124694713]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rsw2t")

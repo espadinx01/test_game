@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="testing"
-run/main_scene="uid://cm65se2aq2pnn"
+run/main_scene="uid://cdmooxcq5mi5q"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameManager="*uid://cjise1aa5nrie"
+Hub="*uid://b1l31mpoth3ba"
 
 [display]
 

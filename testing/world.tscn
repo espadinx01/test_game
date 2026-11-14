@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://r1c0f5x462ad" path="res://sci-fi_hanger_0.png" id="4_pkg7o"]
 [ext_resource type="Texture2D" uid="uid://4qa7richs3xt" path="res://background.jpg" id="4_wse8f"]
 [ext_resource type="Texture2D" uid="uid://ccann31uw6ut1" path="res://sci-fi_hanger_1.png" id="5_gbfbk"]
+[ext_resource type="Script" uid="uid://3pcu2vsi8p7p" path="res://root/start_button.gd" id="6_70uel"]
 [ext_resource type="Material" uid="uid://d3exhrtmyxgec" path="res://DiamondPlate008C_4K-JPG.tres" id="6_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://byylkf1oqecuh" path="res://sci-fi_hanger_2.jpg" id="6_ioo17"]
 [ext_resource type="Material" uid="uid://cyhonymvffguo" path="res://Metal038_4K-JPG.tres" id="6_wse8f"]
@@ -371,8 +372,8 @@ grow_vertical = 2
 
 [node name="Background" type="TextureRect" parent="Control" unique_id=2067768179]
 layout_mode = 0
-offset_right = 355.0
-offset_bottom = 646.0
+offset_right = 514.0
+offset_bottom = 1059.0
 texture = ExtResource("4_wse8f")
 expand_mode = 1
 
@@ -384,7 +385,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_top = 300
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
@@ -393,41 +394,38 @@ layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="Button" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1897712505]
-custom_minimum_size = Vector2(200, 40)
+custom_minimum_size = Vector2(420, 80)
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Start Game
-
-"
+theme_override_font_sizes/font_size = 40
+text = "Start Game"
 flat = true
 autowrap_mode = 3
 expand_icon = true
+script = ExtResource("6_70uel")
 
 [node name="Button2" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1633573709]
-custom_minimum_size = Vector2(200, 40)
+custom_minimum_size = Vector2(420, 80)
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Settings
-
-"
+theme_override_font_sizes/font_size = 40
+text = "Settings"
 flat = true
 
 [node name="Button3" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=102707804]
-custom_minimum_size = Vector2(200, 40)
+custom_minimum_size = Vector2(420, 80)
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Credits
-
-"
+theme_override_font_sizes/font_size = 40
+text = "Credits"
 flat = true
 
 [node name="Button4" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1881313220]
-custom_minimum_size = Vector2(200, 40)
+custom_minimum_size = Vector2(420, 80)
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Exit
-
-"
+theme_override_font_sizes/font_size = 40
+text = "Exit"
 flat = true
 
 [node name="Sketchfab_Scene" type="Node3D" parent="." unique_id=913123805]
