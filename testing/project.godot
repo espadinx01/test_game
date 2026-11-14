@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*uid://cjise1aa5nrie"
 Hub="*uid://b1l31mpoth3ba"
+GameSettings="*uid://blb5ehgocfo0h"
+GameManager="*uid://cjise1aa5nrie"
 
 [display]
 

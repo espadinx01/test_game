@@ -5,6 +5,8 @@ enum GameState { PLAYING, LANDED, CRASHED }
 const LANDER_SCENE := preload("res://Mini Games/lunar_lander/Lander_game.tscn")
 const WORLD_WIDTH := 3200.0
 const SAVE_PATH := "user://highscore.save"
+const LOSE_SOUND_PATH := "res://sounds/mini_game1/lose game over.wav"   # <-- change this if your file is somewhere else
+const WIN_SOUND_PATH := "res://sounds/mini_game1/next level.wav"   # <-- put the exact name of your win sound here
 
 @export var max_landing_speed_y := 55.0
 @export var max_landing_speed_x := 35.0
@@ -20,10 +22,14 @@ var level := 1
 var score := 0
 var high_score := 0
 var stars: Array[Vector3] = []
+var lose_player: AudioStreamPlayer
+var win_player: AudioStreamPlayer
 
 
 func _ready() -> void:
 	high_score = _load_high_score()
+	lose_player = _make_sound_player(LOSE_SOUND_PATH)
+	win_player = _make_sound_player(WIN_SOUND_PATH)
 	for i in 260:
 		stars.append(Vector3(randf() * WORLD_WIDTH, randf_range(-400.0, 1000.0), randf_range(0.3, 0.9)))
 	_start_level()
@@ -36,6 +42,10 @@ func _draw() -> void:   # starfield (drawn before child nodes, so terrain covers
 
 func _start_level() -> void:
 	game_state = GameState.PLAYING
+	if lose_player:
+		lose_player.stop()   # cut the game over sound when restarting
+	if win_player:
+		win_player.stop()   # cut the win sound when the next level starts
 	if is_instance_valid(lander):
 		lander.queue_free()
 
@@ -112,6 +122,8 @@ func _on_lander_touched_ground(impact: Vector2) -> void:
 
 func _land_success(pad: Dictionary) -> void:
 	game_state = GameState.LANDED
+	if win_player:
+		win_player.play()
 	lander.active = false   # disable controls; physics lets it settle on its legs
 
 	var fuel_bonus := int(lander.fuel / 10.0)
@@ -125,8 +137,20 @@ func _land_success(pad: Dictionary) -> void:
 	hud.show_message("PERFECT LANDING!\n+%d  (pad x%d + fuel bonus %d)\nPress Enter for the next level" % [gained, pad.multiplier, fuel_bonus])
 
 
+func _make_sound_player(path: String) -> AudioStreamPlayer:
+	if not ResourceLoader.exists(path):
+		push_warning("Sound not found: " + path)   # the game still runs, just silent
+		return null
+	var player := AudioStreamPlayer.new()
+	player.stream = load(path)
+	add_child(player)
+	return player
+
+
 func _crash(reason: String) -> void:
 	game_state = GameState.CRASHED
+	if lose_player:
+		lose_player.play()
 	_spawn_explosion(lander.global_position)
 	lander.destroy()
 	hud.show_message("CRASHED\n%s\nScore: %d\nPress Enter to restart" % [reason.capitalize(), score])
