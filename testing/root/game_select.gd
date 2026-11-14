@@ -1,5 +1,5 @@
 extends Control
-## Mini-game picker, Friday Night Funkin' week-select style.
+## Mini-game picker, Friday Night Funkin' "week select" style.
 ## To add a game: add one entry to `games` below. Nothing else changes.
 
 signal closed
@@ -10,6 +10,10 @@ const BAR_SELECTED := Rect2(187, 456, 805, 101)  # glowing bar of your UI sheet
 const ITEM_SIZE := Vector2(860, 108)
 const BAND_HEIGHT := 170.0
 const PANEL_SIZE := Vector2(770, 660)
+const START_SOUND_PATH := 'res://sounds/general/choose a game.wav'   # <-- put your sound file path here
+const LAUNCH_TIME := 0.38                      # seconds the sparkle effect lasts
+const FLASH_TIME := 0.12                       # final flash (LAUNCH_TIME + FLASH_TIME = total wait)
+const FLASH_COLOR := Color(0.75, 0.9, 1.0)     # quick flash just before the game starts
 
 var games: Array[Dictionary] = [
 	{
@@ -49,6 +53,8 @@ var _desc: Label
 var _controls: Label
 var _best: Label
 var _fade: ColorRect
+var _spark_tex: GradientTexture2D
+var _spark_ramp: Gradient
 
 
 func _ready() -> void:
@@ -56,6 +62,7 @@ func _ready() -> void:
 	get_viewport().gui_release_focus()   # the menu buttons behind must not react to keys
 	_tex_normal = _atlas(BAR_NORMAL)
 	_tex_selected = _atlas(BAR_SELECTED)
+	_make_spark_assets()
 	_build_background()
 	_build_list()
 	_build_preview()
@@ -80,7 +87,7 @@ func _atlas(region: Rect2) -> AtlasTexture:
 
 func _build_background() -> void:
 	var dim := ColorRect.new()
-	dim.color = Color(0.02, 0.03, 0.07, 0.95)   # hides the menu behind (and blocks its clicks)
+	dim.color = Color(0.02, 0.03, 0.07, 0.95)   # hides the menu behind (it still blocks clicks)
 	add_child(dim)
 	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
@@ -232,6 +239,8 @@ func _build_footer() -> void:
 # ---------- selection ----------
 
 func _select(i: int, animate := true) -> void:
+	if _locked:
+		return
 	if animate and i == _index:
 		return
 	_index = i
@@ -309,8 +318,83 @@ func _play(i: int) -> void:
 	if not ResourceLoader.exists(path):
 		push_warning('Game scene not found: ' + path)
 		return
-	_locked = true
+	_locked = true   # ignore keys, clicks and hovering while the launch effect plays
+	var color: Color = games[i]['color']
+
+	if ResourceLoader.exists(START_SOUND_PATH):
+		var player := AudioStreamPlayer.new()
+		player.stream = load(START_SOUND_PATH)
+		get_tree().root.add_child(player)   # lives in the root: not cut when the scene changes
+		player.finished.connect(player.queue_free)
+		player.play()
+
+	_launch_effect(i, color)
+	await get_tree().create_timer(LAUNCH_TIME).timeout
+
+	# quick bright flash, then the game starts
+	_fade.color = Color(FLASH_COLOR.r, FLASH_COLOR.g, FLASH_COLOR.b, 0.0)
 	var tw := create_tween()
-	tw.tween_property(_fade, 'color:a', 1.0, 0.25)   # fade to black
+	tw.tween_property(_fade, 'color:a', 1.0, FLASH_TIME)
 	await tw.finished
 	get_tree().change_scene_to_file(path)
+
+
+# ---------- launch effect (stays on the selection screen) ----------
+
+func _launch_effect(i: int, color: Color) -> void:
+	if _tween:
+		_tween.kill()
+	for k in _items.size():
+		if k != i:
+			create_tween().tween_property(_items[k], 'modulate:a', 0.15, 0.15)   # dim the others
+	var item := _items[i]
+	var pulse := create_tween().set_loops()   # the chosen bar pulses and flashes
+	pulse.tween_property(item, 'scale', Vector2.ONE * 1.12, 0.09)
+	pulse.parallel().tween_property(item, 'modulate', Color(1.8, 1.8, 2.0), 0.09)
+	pulse.tween_property(item, 'scale', Vector2.ONE * 1.05, 0.09)
+	pulse.parallel().tween_property(item, 'modulate', Color.WHITE, 0.09)
+	_sparkle_burst(item.global_position + item.size * 0.5, color, 90)
+	var sparkles := create_tween().set_loops()   # small sparkles all over the screen
+	sparkles.tween_callback(_random_sparkle.bind(color)).set_delay(0.04)
+
+
+func _random_sparkle(color: Color) -> void:
+	var view := get_viewport_rect().size
+	_sparkle_burst(Vector2(randf_range(120.0, view.x - 120.0),
+			randf_range(BAND_HEIGHT + 40.0, view.y - 120.0)), color, 14)
+
+
+func _sparkle_burst(pos: Vector2, color: Color, amount: int) -> void:
+	var p := CPUParticles2D.new()
+	p.position = pos
+	p.texture = _spark_tex
+	p.color = Color.WHITE.lerp(color, 0.45)
+	p.color_ramp = _spark_ramp
+	p.amount = amount
+	p.one_shot = true
+	p.explosiveness = 0.95
+	p.lifetime = 0.35
+	p.direction = Vector2.UP
+	p.spread = 180.0
+	p.gravity = Vector2(0, 120)
+	p.initial_velocity_min = 200.0
+	p.initial_velocity_max = 600.0
+	p.scale_amount_min = 0.3
+	p.scale_amount_max = 1.1
+	add_child(p)
+	p.emitting = true
+	get_tree().create_timer(0.8).timeout.connect(p.queue_free)
+
+
+func _make_spark_assets() -> void:
+	var g := Gradient.new()   # soft glowing dot (white in the middle, transparent at the edge)
+	g.colors = PackedColorArray([Color(1, 1, 1, 1), Color(1, 1, 1, 0)])
+	_spark_tex = GradientTexture2D.new()
+	_spark_tex.gradient = g
+	_spark_tex.width = 32
+	_spark_tex.height = 32
+	_spark_tex.fill = GradientTexture2D.FILL_RADIAL
+	_spark_tex.fill_from = Vector2(0.5, 0.5)
+	_spark_tex.fill_to = Vector2(0.5, 0.0)
+	_spark_ramp = Gradient.new()   # fades each sparkle out over its life
+	_spark_ramp.colors = PackedColorArray([Color(1, 1, 1, 1), Color(1, 1, 1, 0)])

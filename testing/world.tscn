@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cw05jh623h1lt" path="res://sci-fi_hanger_3.png" id="7_wse8f"]
 [ext_resource type="PackedScene" uid="uid://8nphqnp0to6i" path="res://sci-fi_box.glb" id="11_ic0uy"]
 [ext_resource type="PackedScene" uid="uid://dyx7pjibnva1p" path="res://sci-fi_door_model.glb" id="12_k3n1d"]
+[ext_resource type="AudioStream" uid="uid://sk1rsbw6alop" path="res://music/Background_music.mp3" id="15_hiqwa"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aqk2v"]
 panorama = ExtResource("1_tlwt5")
@@ -492,3 +493,8 @@ transform = Transform3D(-0.0036313757, 0, 0.00931736, 0, 0.010000002, 0, -0.0093
 
 [node name="Sketchfab_Scene5" parent="." unique_id=334718579 instance=ExtResource("12_k3n1d")]
 transform = Transform3D(-0.19860302, 0, 0.023597581, 0, 0.2, 0, -0.023597581, 0, -0.19860302, 9.446921, -1.5871127, -4.1861157)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1321220137]
+stream = ExtResource("15_hiqwa")
+volume_db = -12.0
+autoplay = true
