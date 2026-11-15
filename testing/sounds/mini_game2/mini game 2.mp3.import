@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ifhmmmkc7y1r"
+path="res://.godot/imported/mini game 2.mp3-ead29c49d0e7f772a2b5858fc46def4f.mp3str"
+
+[deps]
+
+source_file="res://sounds/mini_game2/mini game 2.mp3"
+dest_files=["res://.godot/imported/mini game 2.mp3-ead29c49d0e7f772a2b5858fc46def4f.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

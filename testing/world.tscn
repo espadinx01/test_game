@@ -11,10 +11,12 @@
 [ext_resource type="Material" uid="uid://d3exhrtmyxgec" path="res://DiamondPlate008C_4K-JPG.tres" id="6_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://byylkf1oqecuh" path="res://sci-fi_hanger_2.jpg" id="6_ioo17"]
 [ext_resource type="Material" uid="uid://cyhonymvffguo" path="res://Metal038_4K-JPG.tres" id="6_wse8f"]
+[ext_resource type="Script" uid="uid://bpejyafcwh5ie" path="res://root/exit_button.gd" id="7_udxuc"]
 [ext_resource type="Texture2D" uid="uid://cw05jh623h1lt" path="res://sci-fi_hanger_3.png" id="7_wse8f"]
 [ext_resource type="PackedScene" uid="uid://8nphqnp0to6i" path="res://sci-fi_box.glb" id="11_ic0uy"]
 [ext_resource type="PackedScene" uid="uid://dyx7pjibnva1p" path="res://sci-fi_door_model.glb" id="12_k3n1d"]
 [ext_resource type="AudioStream" uid="uid://sk1rsbw6alop" path="res://music/Background_music.mp3" id="15_hiqwa"]
+[ext_resource type="Texture2D" uid="uid://c4nm7an5pmx70" path="res://Kelper’s Cadet_ Silver Starlight Logo.png" id="16_2u3nc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aqk2v"]
 panorama = ExtResource("1_tlwt5")
@@ -428,6 +430,7 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 flat = true
+script = ExtResource("7_udxuc")
 
 [node name="Sketchfab_Scene" type="Node3D" parent="." unique_id=913123805]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68223, 3.3113136)
@@ -498,3 +501,13 @@ transform = Transform3D(-0.19860302, 0, 0.023597581, 0, 0.2, 0, -0.023597581, 0,
 stream = ExtResource("15_hiqwa")
 volume_db = -12.0
 autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=258933331]
+offset_left = 40.0
+offset_top = 80.0
+offset_right = 460.0
+offset_bottom = 280.0
+mouse_filter = 2
+texture = ExtResource("16_2u3nc")
+expand_mode = 1
+stretch_mode = 5
