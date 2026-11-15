@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://d3exhrtmyxgec" path="res://DiamondPlate008C_4K-JPG.tres" id="6_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://byylkf1oqecuh" path="res://sci-fi_hanger_2.jpg" id="6_ioo17"]
 [ext_resource type="Material" uid="uid://cyhonymvffguo" path="res://Metal038_4K-JPG.tres" id="6_wse8f"]
+[ext_resource type="Script" uid="uid://3hnrc14xp1mg" path="res://root/credits_button.gd" id="7_ikiii"]
 [ext_resource type="Script" uid="uid://bpejyafcwh5ie" path="res://root/exit_button.gd" id="7_udxuc"]
 [ext_resource type="Texture2D" uid="uid://cw05jh623h1lt" path="res://sci-fi_hanger_3.png" id="7_wse8f"]
 [ext_resource type="PackedScene" uid="uid://8nphqnp0to6i" path="res://sci-fi_box.glb" id="11_ic0uy"]
@@ -422,6 +423,7 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
 text = "Credits"
 flat = true
+script = ExtResource("7_ikiii")
 
 [node name="Button4" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1881313220]
 custom_minimum_size = Vector2(420, 80)
